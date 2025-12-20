@@ -15,7 +15,7 @@ To set up the container, you can use docker-compose or the docker cli. Unless a 
 ---
 services:
   code-tunnel:
-    image: ghcr.io/tibynx/code-tunnel:latest
+    image: tibynx/code-tunnel:latest
     container_name: code-tunnel
     environment:
       - PUID=1000
@@ -42,7 +42,7 @@ docker run -d \
   -v /path/to/config:/config \
   --restart unless-stopped \
   --hostname vscode `#optional` \
-  ghcr.io/tibynx/code-tunnel:latest
+  tibynx/code-tunnel:latest
 ```
 
 After setting up the container, check your container logs for your GitHub login code. Depending on your configuration, it might take a few minutes before the tunnel is started. The login code expires every 10 minutes.
