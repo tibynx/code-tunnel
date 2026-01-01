@@ -83,6 +83,3 @@ This image is updated monthly. To update the app, you'll need to pull the latest
 To connect to the container, open Visual Studio Code and install the `Remote Tunnels` extension. Then run the `Remote - Tunnels: Connect to Tunnel....` command. You can find the command by pressing `F1` to open the Command Palette or by clicking on the remote indicator in the lower left corner. You'll be prompted to log into GitHub and will get a list of available tunnels to connect to. Furthermore, you can also connect to the tunnel via web using the link with your tunnel name. Then open a folder, and start coding! You can store your projects inside `/config/workspace`!
 
 * [https://vscode.dev/tunnel/your-tunnel-name](https://vscode.dev)
-
-> [!Note]
-> If you try to open a terminal straight away after connecting, you might recive an `chdir(2) failed.: Permission denied` error. You only have proper permissions in your `/config` folder!
