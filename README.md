@@ -3,7 +3,7 @@
 
 VS Code Tunnel inside a Docker container. VS Code, or [Visual Studio Code](https://code.visualstudio.com/), is an integrated development environment developed by Microsoft. This container allows you to create a secure development environment using Docker that you can access via VS Code's Remote Tunnels feature.
 
-![code](https://github.com/user-attachments/assets/dc9b2f18-08a4-4202-9e21-34f45e4bf3f0)
+![code](.github/preview.png)
 
 ## Setup
 
