@@ -2,6 +2,7 @@ FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
 
 # set labels
 ARG IMAGE_BUILD_DATE
+ARG INSTALL_VERSION
 LABEL release_channel="stable"
 LABEL org.opencontainers.image.authors="tibynx"
 LABEL org.opencontainers.image.created="${IMAGE_BUILD_DATE}"
@@ -48,7 +49,7 @@ RUN \
     https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list && \
   apt-get update -y && \
   apt-get install --no-install-recommends -y \
-    code && \
+    code=${INSTALL_VERSION} && \
   echo "**** clean up ****" && \
   apt-get clean && \
   rm -rf \
