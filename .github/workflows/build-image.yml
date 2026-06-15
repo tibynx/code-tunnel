@@ -21,7 +21,7 @@ jobs:
           echo "date=$(date --rfc-3339=seconds | sed 's/ /T/')" >> $GITHUB_OUTPUT
 
   version:
-    name: Get latest package version
+    name: Determine package version and image tag
     runs-on: ubuntu-latest
     outputs:
       package_version: ${{ steps.version.outputs.package_version }}
@@ -37,7 +37,7 @@ jobs:
             | sudo tee -a /etc/apt/sources.list.d/microsoft.list
           sudo apt-get update -y
 
-      - name: Get package version
+      - name: Get package version and set image tag 
         id: version
         run: |
           package_version=$(apt-cache policy code | awk -F': ' '/Candidate:/ {print $2}')
