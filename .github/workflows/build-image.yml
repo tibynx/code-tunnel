@@ -25,6 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       package_version: ${{ steps.version.outputs.package_version }}
+      image_tag: ${{ steps.version.outputs.image_tag }}
     steps:
       - name: Add Microsoft's APT repo for VS Code
         run: |
@@ -39,9 +40,13 @@ jobs:
       - name: Get package version
         id: version
         run: |
-          package_version=$(apt list code 2>/dev/null | grep -v "^Listing" | awk '{print $2}' | cut -d'-' -f1)
-          echo "package_version=${package_version}" >> $GITHUB_OUTPUT
-          echo "The package version is $package_version"
+          package_version=$(apt-cache policy code | awk -F': ' '/Candidate:/ {print $2}')
+          [ -n "$package_version" ] || { echo "Failed to determine VS Code package version" >&2; exit 1; }
+          image_tag=$(echo "$package_version" | cut -d'-' -f1)
+          echo "package_version=$package_version" >> $GITHUB_OUTPUT
+          echo "image_tag=$image_tag" >> $GITHUB_OUTPUT
+          echo "Package Version: $package_version"
+          echo "Image Tag: $image_tag"
 
   build:
     name: Build and push image
@@ -79,11 +84,12 @@ jobs:
           push: true
           build-args: |
             IMAGE_BUILD_DATE=${{ needs.date.outputs.date }}
+            INSTALL_VERSION=${{ needs.version.outputs.package_version }}
           tags: |
             ghcr.io/${{ github.repository_owner }}/code-tunnel:latest
-            ghcr.io/${{ github.repository_owner }}/code-tunnel:${{ needs.version.outputs.package_version }}
+            ghcr.io/${{ github.repository_owner }}/code-tunnel:${{ needs.version.outputs.image_tag }}
             ${{ vars.DOCKERHUB_USERNAME }}/code-tunnel:latest
-            ${{ vars.DOCKERHUB_USERNAME }}/code-tunnel:${{ needs.version.outputs.package_version }}
+            ${{ vars.DOCKERHUB_USERNAME }}/code-tunnel:${{ needs.version.outputs.image_tag }}
           labels: |
             org.opencontainers.image.ref.name=${{ github.ref }}
             org.opencontainers.image.revision=${{ github.sha }}
