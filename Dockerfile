@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
+FROM ghcr.io/linuxserver/baseimage-ubuntu:resolute
 
 # set labels
 ARG IMAGE_BUILD_DATE
@@ -13,8 +13,8 @@ LABEL org.opencontainers.image.source="https://github.com/tibynx/code-tunnel"
 LABEL org.opencontainers.image.title="VS Code Tunnel"
 LABEL org.opencontainers.image.url="https://github.com/tibynx/code-tunnel/packages"
 LABEL org.opencontainers.image.vendor="tibynx"
-LABEL org.opencontainers.image.base.name="ghcr.io/linuxserver/baseimage-ubuntu:noble"
-LABEL org.opencontainers.image.base.documentation="https://github.com/linuxserver/docker-baseimage-ubuntu/blob/noble/README.md"
+LABEL org.opencontainers.image.base.name="ghcr.io/linuxserver/baseimage-ubuntu:resolute"
+LABEL org.opencontainers.image.base.documentation="https://github.com/linuxserver/docker-baseimage-ubuntu/blob/resolute/README.md"
 
 # branding
 ENV LSIO_FIRST_PARTY=false
