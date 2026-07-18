@@ -5,6 +5,4 @@ exec \
         s6-setuidgid abc \
             /usr/bin/code tunnel \
                 --accept-server-license-terms \
-                --cli-data-dir /config/data/cli \
-                --server-data-dir /config/data/server \
                 --name "${TUNNEL_NAME}"
