@@ -19,7 +19,9 @@ LABEL org.opencontainers.image.base.documentation="https://github.com/linuxserve
 # branding
 ENV LSIO_FIRST_PARTY=false
 
-# set default tunnel name
+# set tunnel options
+ENV VSCODE_CLI_DATA_DIR="/config/data/cli"
+ENV VSCODE_AGENT_FOLDER="/config/data/server"
 ENV TUNNEL_NAME="code-tunnel"
 
 # environment settings
