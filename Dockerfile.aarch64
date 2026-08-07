@@ -50,8 +50,13 @@ RUN \
     "deb [arch=arm64,armhf signed-by=/usr/share/keyrings/packages.microsoft.gpg] \
     https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list && \
   apt-get update -y && \
-  apt-get install --no-install-recommends -y \
-    code=${INSTALL_VERSION} && \
+  if apt-cache show "code=${INSTALL_VERSION}" > /dev/null 2>&1; then \
+    apt-get install --no-install-recommends -y \
+      code=${INSTALL_VERSION}; \
+  else \
+    apt-get install --no-install-recommends -y \
+      code; \
+  fi && \
   echo "**** clean up ****" && \
   apt-get clean && \
   rm -rf \
