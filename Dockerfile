@@ -50,7 +50,7 @@ RUN \
     "deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/packages.microsoft.gpg] \
     https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list && \
   apt-get update -y && \
-  if apt-cache show "code=${INSTALL_VERSION}" > /dev/null 2>&1; then \
+  if apt-cache madison code | awk '{ print $3 }' | grep -Fxq "${INSTALL_VERSION}"; then \
     apt-get install --no-install-recommends -y \
       code=${INSTALL_VERSION}; \
   else \
