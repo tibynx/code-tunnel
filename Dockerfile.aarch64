@@ -51,7 +51,7 @@ RUN \
     https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list && \
   apt-get update -y && \
   apt-get install --no-install-recommends -y \
-    code=${INSTALL_VERSION} && \
+    "code=${INSTALL_VERSION}*" && \
   echo "**** clean up ****" && \
   apt-get clean && \
   rm -rf \
