@@ -29,6 +29,10 @@ ARG DEBIAN_FRONTEND="noninteractive"
 ENV HOME="/config"
 
 RUN \
+  echo "**** add branding ****" && \
+  curl --create-dirs -o \
+    /etc/s6-overlay/s6-rc.d/init-adduser/branding \
+    https://raw.githubusercontent.com/tibynx/tibynx/refs/heads/main/branding && \
   echo "**** install runtime dependencies ****" && \
   apt-get update && \
   apt-get install -y \
