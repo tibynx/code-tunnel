@@ -40,12 +40,16 @@ jobs:
       - name: Get package version and set image tag 
         id: version
         run: |
-          package_version=$(apt-cache policy code | awk -F': ' '/Candidate:/ {print $2}')
-          [ -n "$package_version" ] || { echo "Failed to determine VS Code package version" >&2; exit 1; }
-          image_tag=$(echo "$package_version" | cut -d'-' -f1)
+          package_version_amd64=$(apt-cache policy code | awk -F': ' '/Candidate:/ {print $2}')
+          [ -n "$package_version_amd64" ] || { echo "Failed to determine VS Code package version for amd64" >&2; exit 1; }
+          package_version_arm64=$(apt-cache policy code:arm64 | awk -F': ' '/Candidate:/ {print $2}')
+          [ -n "$package_version_arm64" ] || { echo "Failed to determine VS Code package version for arm64" >&2; exit 1; }
+          package_version=$(echo "$package_version_amd64" | cut -d'-' -f1)
+          image_tag=$package_version
           echo "package_version=$package_version" >> $GITHUB_OUTPUT
           echo "image_tag=$image_tag" >> $GITHUB_OUTPUT
-          echo "Package Version: $package_version"
+          echo "Package Version amd64: $package_version_amd64"
+          echo "Package Version arm64: $package_version_arm64"
           echo "Image Tag: $image_tag"
 
   build:
